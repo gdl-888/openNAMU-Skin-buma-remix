@@ -29,6 +29,10 @@ td {
     color: #bf4c4c;
 }
 
+#inside {
+    color: #008000;
+}
+
 #out_link {
     color: #008000;
 }
@@ -145,4 +149,24 @@ button#save:hover {
 #cate {
     border: 1px solid #aaa;
     padding: 5px;
+}
+
+#topic_top_title {
+    margin-bottom: 10px;
+}
+
+#toron {
+    width: 100%;
+}
+
+#toron_color_green {
+    background-color: #B0D3AD;
+}
+
+#toron_color_red {
+    background-color: #f3c2c2;
+}
+
+#toron_color {
+    background-color: #d5d5d5;
 }
