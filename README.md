@@ -1,5 +1,5 @@
-# theseed-skin-buma
-Skin for the seed engine
+# openNAMU-Skin-Buma
+Skin for the openNAMU
 
 # CSS
 To compile css, install less globally and run `lessc ./less/layout.less ./static/css/layout.css`. Usually css is pre-compiled so you don't have to do this unless you edited less files.
