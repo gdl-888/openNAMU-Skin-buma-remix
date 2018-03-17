@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/views/buma/css/bootstrap-custom.css">
+        <link rel="stylesheet" href="/views/buma/css/bulma.css">
+        <link rel="stylesheet" href="/views/buma/css/bulma.css.map">
+        <link rel="stylesheet" href="/views/buma/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/views/buma/css/fa-svg-with-js.css">
+        <link rel="stylesheet" href="/views/buma/css/layout.css">
+        <link rel="stylesheet" href="/views/buma/css/plus.css">
+        <script type="text/javascript" src="/views/buma/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/views/buma/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/views/buma/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/views/buma/js/layout.js"></script>
+        <script type="text/javascript" src="/views/buma/js/fontawesome-all.min.js"></script>
+        {{imp[1][5]|safe}}
+        {{imp[2][3]|safe}}
+    </head>
+    <body class="buma">
+        <div class="nav navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">{{imp[1][4]|safe}}</a>
+                <button class="button navbar-burger" data-target="mainNavbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="navbar-menu" id="mainNavbar">
+                <div class="navbar-start">
+                    <a href="/recent_changes" class="navbar-item">
+                        <span class="icon">
+                            <i class="fas fa-binoculars"></i>
+                        </span> 최근 변경</a>
+                    <a href="/recent_discuss" class="navbar-item">
+                        <span class="icon">
+                            <i class="fas fa-comments"></i>
+                        </span> 최근 토론</a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="#" class="navbar-link">
+                            <span class="icon">
+                                <i class="fas fa-cogs"></i>
+                            </span> 도구</a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="/other">
+                                <span class="icon">
+                                    <i class="fas fa-cogs"></i>
+                                </span>
+                                기타
+                            </a>
+                            <a class="navbar-item" href="/random">
+                                <span class="icon">
+                                    <i class="fas fa-random"></i>
+                                </span>
+                                무작위
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <form method="post" action="/search" id="searchform" role="search">
+                                    <input class="input is-primary ui-autocomplete-input" name="search" placeholder="검색" id="searchInput" autocomplete="off" type="text">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/user" class="navbar-link">
+                            {% if imp[2][2] == 1 %}
+                                <span class="icon">
+                                    <i class="fas fa-user-circle"></i>
+                                </span>
+                            {% elif imp[2][2] == 0 %}
+                                <span class="icon">
+                                    <i class="fas fa-user-times"></i>
+                                </span>
+                            {% else %}
+                                <span class="icon">
+                                    <i class="fas fa-user-secret"></i>
+                                </span>
+                            {% endif %}
+                            {% if imp[2][4] != '' %}
+                                <img src="http://www.gravatar.com/avatar/{{imp[2][4]|md5_replace}}?s=30">
+                            {% else %}
+                                사용자
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="hero is-primary" id="wiki-main-title">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        {{imp[0]}}
+                    </h1>
+                    <h2 class="subtitle">
+                        {% if imp[3][0] != 0 %}
+                            {{imp[3][0]}}
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+            <div class="hero-foot">
+                <div class="container">
+                    <div class="tabs is-left is-boxed" id="wiki-article-menu">
+                        <ul>
+                            {% if menu != 0 %}
+                                {% for sub_d in menu %}
+                                    <li>
+                                        {% if sub_d[1] == 1 %}
+                                            <a href="/{{sub_d[0]}}" id="open">토론</a>
+                                        {% elif sub_d[1] == 0 %}
+                                            <a href="/{{sub_d[0]}}">토론</a>
+                                        {% else %}
+                                            <a href="/{{sub_d[0]}}">{{sub_d[1]}}</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                {{data|safe}}
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="container">
+                <div class="content has-text-centered">
+                    <p>
+                        {{imp[1][1]|safe}}
+                        <br>
+                        <a href="https://github.com/LiteHell/theseed-skin-buma">LiteHell</a> <a href="https://github.com/2DU/openNAMU">openNAMU</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

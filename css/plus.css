@@ -1,0 +1,148 @@
+table {
+    background-color: #f5f5f5;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 5px 10px;
+    border: 1px solid #dddddd;
+}
+
+#toc {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 20px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#toc-name {
+    font-size: 18px;
+}
+
+#open {
+    color: yellow;
+}
+
+#not_thing {
+    color: #bf4c4c;
+}
+
+#out_link {
+    color: #008000;
+}
+
+#out_link::before {
+    padding: 0px;
+    background: green;
+    color: white;
+    content: "外";
+}
+
+input, textarea {
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+button {
+    color: #292b2c;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: all .2s ease-in-out;
+}
+
+button:hover {
+    background-color: #e6e6e6;
+    border: 1px solid #adadad;
+}
+
+button#save {
+    color: #fff;
+    background-color: #0275d8;
+    border: 1px solid #0275d8;
+}
+
+button#save:hover {
+    background-color: #025aa5;
+    border: 1px solid #01549b;
+}
+
+#come {
+    margin-left: 10px;
+}
+
+.section .container ul {
+    list-style: disc outside;
+    margin-bottom: 1em;
+    margin: .4em 0 .4em 1.5em;
+}
+
+.section .container ul li {
+    margin: .4em 0;
+    list-style: inherit !important;
+    list-style-type: inherit;
+    list-style-type: inherit !important;
+}
+
+.section .container h1, h2, h3, h4, h5, h6 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.section .container h1 {
+    font-size: 2.3em;
+}
+
+.section .container h2 {
+    font-size: 1.8em;
+}
+
+.section .container h3 {
+    font-size: 1.6em;
+}
+
+.section .container h4 {
+    font-size: 1.4em;
+}
+
+.section .container h5 {
+    font-size: 1.2em;
+}
+
+.section .container h6 {
+    font-size: 1em;
+}
+
+.title, .subtitle {
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+#cate {
+    border: 1px solid #aaa;
+    padding: 5px;
+}
