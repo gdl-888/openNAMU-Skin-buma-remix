@@ -115,6 +115,7 @@ button#save:hover {
 .section .container h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .section .container h1 {
@@ -169,4 +170,10 @@ button#save:hover {
 
 #toron_color {
     background-color: #d5d5d5;
+}
+
+select {
+    border: 1px solid #d9d9d9;
+    padding: 5px;
+    border-radius: 3px;
 }
