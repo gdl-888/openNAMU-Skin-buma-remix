@@ -1,8 +1,5 @@
 # openNAMU-Skin-Buma
-Skin for the openNAMU
-
-# CSS
-To compile css, install less globally and run `lessc ./less/layout.less ./static/css/layout.css`. Usually css is pre-compiled so you don't have to do this unless you edited less files.
+다운 받고 폴더 이름을 "buma"로 변경해서 "views"에 넣어주세요.
 
 # Copyright
 Copyright (C) 2017 LiteHell
