@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>{{imp[0]}} - {{imp[1][0]}}</title>
+        <link rel="stylesheet" href="/views/main_css/main.css">
         <link rel="stylesheet" href="/views/buma/css/bootstrap-custom.css">
         <link rel="stylesheet" href="/views/buma/css/bulma.css">
         <link rel="stylesheet" href="/views/buma/css/bulma.css.map">
@@ -90,7 +91,7 @@
                             {% if imp[2][4] != '' %}
                                 <img src="http://www.gravatar.com/avatar/{{imp[2][4]|md5_replace}}?s=30">
                             {% else %}
-                                사용자
+                                {{imp[2][5]}}
                             {% endif %}
                         </a>
                     </div>
