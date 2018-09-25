@@ -20,7 +20,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </head>
     <body class="buma">
-        <div class="nav navbar" role="navigation" aria-label="main navigation">
+        <div id="top" class="nav navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a href="/" class="navbar-item">{{imp[1][4]|safe}}</a>
                 <button class="button navbar-burger" data-target="mainNavbar">
@@ -131,11 +131,28 @@
             <div class="container">
                 {{data|safe}}
             </div>
+            <div id="nav_bar">
+                <div id="go_top">
+                    <a href="#top">
+                        <i class="fas fa-arrow-up"></i>  
+                    </a>                  
+                </div>
+                <div id="go_bottom">
+                    <a href="#bottom">
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+                <div id="go_toc">
+                    <a href="#toc">
+                        <i class="fas fa-list"></i>
+                    </a>
+                </div>                                    
+            </div>
         </section>
         <footer class="footer">
             <div class="container">
                 <div class="content has-text-centered">
-                    <p>
+                    <p id="bottom">
                         {{imp[1][1]|safe}}
                         <br>
                         <a href="https://github.com/LiteHell/theseed-skin-buma">LiteHell</a> <a href="https://github.com/2DU/openNAMU">openNAMU</a>
