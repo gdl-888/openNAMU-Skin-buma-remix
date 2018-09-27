@@ -186,13 +186,13 @@ select {
 #go_toc {
     display: inline-block;
     padding: 10px;
-    border-left: 2px solid gainsboro;
+    border-left: 1px solid gainsboro;
 }
 
 #go_top {
     display: inline-block;
     padding: 10px;
-    border-right: 2px solid gainsboro;
+    border-right: 1px solid gainsboro;
 }
 
 #go_bottom {
@@ -206,5 +206,6 @@ select {
     position: fixed;
     bottom: 0;
     right: 0;
-    border: 2px solid gainsboro;
+    border: 1px solid gainsboro;
+    line-height: 25px;
 }
