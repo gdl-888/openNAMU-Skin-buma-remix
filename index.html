@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{imp[0]}} - {{imp[1][0]}}</title>
+        <title>{{imp[0]}}{% if imp[3][0] != 0 %} {{imp[3][0]}}{% endif %} - {{imp[1][0]}}</title>
         <link rel="stylesheet" href="/views/main_css/main.css">
-        <link rel="stylesheet" href="/views/buma/css/bootstrap-custom.css">
-        <link rel="stylesheet" href="/views/buma/css/bulma.css">
-        <link rel="stylesheet" href="/views/buma/css/bulma.css.map">
-        <link rel="stylesheet" href="/views/buma/css/jquery-ui.min.css">
-        <link rel="stylesheet" href="/views/buma/css/fa-svg-with-js.css">
-        <link rel="stylesheet" href="/views/buma/css/layout.css">
-        <link rel="stylesheet" href="/views/buma/css/plus.css">
-        <script type="text/javascript" src="/views/buma/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/views/buma/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="/views/buma/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/views/buma/js/layout.js"></script>
-        <script type="text/javascript" src="/views/buma/js/fontawesome-all.min.js"></script>
+        <link rel="stylesheet" href="/views/buma-v2/css/bootstrap-custom.css">
+        <link rel="stylesheet" href="/views/buma-v2/css/bulma.css">
+        <link rel="stylesheet" href="/views/buma-v2/css/bulma.css.map">
+        <link rel="stylesheet" href="/views/buma-v2/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/views/buma-v2/css/fa-svg-with-js.css">
+        <link rel="stylesheet" href="/views/buma-v2/css/layout.css">
+        <link rel="stylesheet" href="/views/buma-v2/css/plus.css">
+		 <link rel="stylesheet" href="/views/buma-v2/css/bootstrap-custom.css">
+        <script type="text/javascript" src="/views/buma-v2/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/views/buma-v2/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/views/buma-v2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/views/buma-v2/js/layout.js"></script>
+        <script type="text/javascript" src="/views/buma-v2/js/fontawesome-all.min.js"></script>
         {{imp[1][5]|safe}}
         {{imp[2][3]|safe}}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		 <script>
+			var egg = 0;
+		 </script>
     </head>
+	
     <body class="buma">
         <div id="top" class="nav navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
@@ -31,11 +36,11 @@
             </div>
             <div class="navbar-menu" id="mainNavbar">
                 <div class="navbar-start">
-                    <a href="/recent_changes" class="navbar-item">
+                    <a href="/RecentChanges" class="navbar-item">
                         <span class="icon">
                             <i class="fas fa-binoculars"></i>
                         </span> 최근 변경</a>
-                    <a href="/recent_discuss" class="navbar-item">
+                    <a href="/RecentDiscuss" class="navbar-item">
                         <span class="icon">
                             <i class="fas fa-comments"></i>
                         </span> 최근 토론</a>
@@ -45,17 +50,59 @@
                                 <i class="fas fa-cogs"></i>
                             </span> 도구</a>
                         <div class="navbar-dropdown">
+                            <a class="navbar-item" href="/please">
+                                <span class="icon">
+                                    <i class="fas fa-beer"></i>
+                                </span>
+                                작성이 필요한 문서
+                            </a>
+								<a class="navbar-item" href="/baduk">
+									<span class="icon"><i class="fas fa-cubes"></i></span>
+									바둑 두기
+								</a>
+								<a class="navbar-item" href="/janggi">
+									<span class="icon"><i class="fas fa-bullhorn"></i></span>
+									장기 두기
+								</a>
+								<a class="navbar-item" href="/web">
+									<span class="icon"><i class="fas fa-database"></i></span>
+									웹서핑
+								</a>
+								<a class="navbar-item" href="/block_log">
+                                <span class="icon">
+                                    <i class="fas fa-ban"></i>
+                                </span>
+                                차단 내역
+                            </a>
+								<a class="navbar-item" href="/admin_log">
+                                <span class="icon">
+                                    <i class="fas fa-ban"></i>
+                                </span>
+                                권한 사용 내역
+                            </a>
+								<a class="navbar-item" href="/title_index">
+                                <span class="icon">
+                                    <i class="fas fa-beer"></i>
+                                </span>
+                                모든 문서 목록
+                            </a>
+								<a class="navbar-item" href="/upload">
+                                <span class="icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </span>
+                                파일 올리기
+                            </a>
                             <a class="navbar-item" href="/other">
                                 <span class="icon">
                                     <i class="fas fa-cogs"></i>
                                 </span>
                                 기타
                             </a>
-                            <a class="navbar-item" href="/random">
+								<a class="navbar-item" href="/manager">
                                 <span class="icon">
-                                    <i class="fas fa-random"></i>
+                                    <i class="fas fa-cogs"></i>
                                 </span>
-                                무작위
+                                관리 도구
                             </a>
                         </div>
                     </div>
@@ -64,7 +111,7 @@
                     <div class="navbar-item">
                         <div class="field">
                             <div class="control has-icons-left">
-                                <form method="post" action="/search" id="searchform" role="search">
+                                <form method="post" action="/go" id="searchform" role="search">
                                     <input class="input is-primary ui-autocomplete-input" name="search" placeholder="검색" id="searchInput" autocomplete="off" type="text">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-search"></i>
@@ -73,53 +120,205 @@
                             </div>
                         </div>
                     </div>
+						<a href="/random" class="navbar-item"> <span class="icon"> <svg class="svg-inline--fa fa-random fa-w-16" aria-hidden="true" data-fa-processed="" data-prefix="fas" data-icon="random" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504.971 359.029c9.373 9.373 9.373 24.569 0 33.941l-80 79.984c-15.01 15.01-40.971 4.49-40.971-16.971V416h-58.785a12.004 12.004 0 0 1-8.773-3.812l-70.556-75.596 53.333-57.143L352 336h32v-39.981c0-21.438 25.943-31.998 40.971-16.971l80 79.981zM12 176h84l52.781 56.551 53.333-57.143-70.556-75.596A11.999 11.999 0 0 0 122.785 96H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12zm372 0v39.984c0 21.46 25.961 31.98 40.971 16.971l80-79.984c9.373-9.373 9.373-24.569 0-33.941l-80-79.981C409.943 24.021 384 34.582 384 56.019V96h-58.785a12.004 12.004 0 0 0-8.773 3.812L96 336H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h110.785c3.326 0 6.503-1.381 8.773-3.812L352 176h32z"></path></svg><!-- <i class="fas fa-random"></i> --> </span></a>
+						
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a href="/user" class="navbar-item">
+                        <a href="#" class="navbar-link">
                             {% if imp[2][2] == 1 %}
                                 <span class="icon">
-                                    <i class="fas fa-user-circle"></i>
+                                    <i class="fas fa-user"></i>
                                 </span>
                             {% elif imp[2][2] == 0 %}
                                 <span class="icon">
-                                    <i class="fas fa-user-times"></i>
+                                    <i class="fas fa-user-secret"></i>
                                 </span>
                             {% else %}
                                 <span class="icon">
-                                    <i class="fas fa-user-secret"></i>
+                                    <i class="fas fa-user"></i>
                                 </span>
                             {% endif %}
                             {% if imp[2][4] != '' %}
-                                <img src="https://www.gravatar.com/avatar/{{imp[2][4]|md5_replace}}?s=30">
+                                {% if imp[2][5] == '사용자' %}
+										익명
+									{% else %}
+										{{imp[2][5]}}
+									{% endif %}
                             {% else %}
-                                {{imp[2][5]}}
+									{% if imp[2][5] == '사용자' %}
+										익명
+									{% else %}
+										{{imp[2][5]}}
+									{% endif %}
                             {% endif %}
                         </a>
+							<div class="navbar-dropdown is-right">
+								<a class="navbar-item" href="/user">
+                                <span class="icon">
+                                    <i class="fas fa-wrench"></i>
+                                </span>
+                                스킨 설정
+                            </a>
+								{% if imp[2][5] != '사용자' %}
+								   <div class="dropdown-divider"></div>
+								   <a class="navbar-item" href="/change">
+									<span class="icon">
+										<i class="fas fa-user-circle"></i>
+									</span>
+									내정보
+									</a>
+										<a class="navbar-item" href="/w/사용자:{{imp[2][5]}}">
+										<span class="icon">
+											<i class="fas fa-sticky-note"></i>
+										</span>
+										내 사용자 문서
+									</a>
+									<div class="dropdown-divider"></div>
+								   <a class="navbar-item" href="/contribution/author/{{imp[2][5]}}/document">
+										<span class="icon">
+											<i class="fas fa-chart-line"></i>
+										</span>
+										내 문서 기여 목록
+									</a>
+										<a class="navbar-item" href="/contribution/author/{{imp[2][5]}}/discuss">
+										<span class="icon">
+											<i class="fas fa-chart-bar"></i>
+										</span>
+										내 토론 기여 목록
+									</a>
+								{% endif %}
+								<div class="dropdown-divider"></div>
+								{% if imp[2][5] != '사용자' %}
+									</a>
+										<a class="navbar-item" href="/logout">
+										<span class="icon">
+											<i class="fas fa-sign-out-alt"></i>
+										</span>
+										로그아웃
+									</a>
+								{% else %}
+									</a>
+										<a class="navbar-item" href="/login">
+										<span class="icon">
+											<i class="fas fa-sign-in-alt"></i>
+										</span>
+										로그인
+									</a>
+								{% endif %}
+							</div>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="hero is-primary" id="wiki-main-title">
+		{% if imp[0] == '문제가 발생했습니다!' %}
+		<section class="hero is-danger" id="wiki-main-title">
+		{% else %}
+       <section class="hero is-primary" id="wiki-main-title">
+		{% endif %}
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
                         {{imp[0]}}
-                    </h1>
-                    <h2 class="subtitle">
-                        {% if imp[3][0] != 0 %}
-                            {{imp[3][0]}}
+						   {% if imp[3][0] != 0 %}
+                             {{imp[3][0]}}
                         {% endif %}
-                    </h2>
+                    </h1>
+					  <h2 class="subtitle">
+						  {% if rdg != 1 %}
+						      openNAMU
+						  {% else %}
+						      {{edt}}에 마지막으로 수정됐습니다.
+						  {% endif %}
+					  </h2>
+					  
                 </div>
             </div>
             <div class="hero-foot">
                 <div class="container">
                     <div class="tabs is-left is-boxed" id="wiki-article-menu">
                         <ul>
+								{% if menu == 0 %}
+									<li class="is-active">
+									<a href="#">
+									<span class="icon">
+									<svg class="svg-inline--fa fa-cogs fa-w-20" aria-hidden="true" data-prefix="fas" data-icon="cogs" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M512.1 191l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4-11.8-4.4-22.6-10.7-32.1-18.6-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3-2-12-2.1-24.6 0-37.1 1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7 9.5-7.9 20.4-14.2 32.1-18.6 5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0L552 6.3c3-5.3 9.4-7.5 15.1-5.4 11.8 4.4 22.6 10.7 32.1 18.6 4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3 2 12 2.1 24.6 0 37.1-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7-9.5 7.9-20.4 14.2-32.1 18.6-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zm-10.5-58.8c38.5 29.6 82.4-14.3 52.8-52.8-38.5-29.7-82.4 14.3-52.8 52.8zM386.3 286.1l33.7 16.8c10.1 5.8 14.5 18.1 10.5 29.1-8.9 24.2-26.4 46.4-42.6 65.8-7.4 8.9-20.2 11.1-30.3 5.3l-29.1-16.8c-16 13.7-34.6 24.6-54.9 31.7v33.6c0 11.6-8.3 21.6-19.7 23.6-24.6 4.2-50.4 4.4-75.9 0-11.5-2-20-11.9-20-23.6V418c-20.3-7.2-38.9-18-54.9-31.7L74 403c-10 5.8-22.9 3.6-30.3-5.3-16.2-19.4-33.3-41.6-42.2-65.7-4-10.9.4-23.2 10.5-29.1l33.3-16.8c-3.9-20.9-3.9-42.4 0-63.4L12 205.8c-10.1-5.8-14.6-18.1-10.5-29 8.9-24.2 26-46.4 42.2-65.8 7.4-8.9 20.2-11.1 30.3-5.3l29.1 16.8c16-13.7 34.6-24.6 54.9-31.7V57.1c0-11.5 8.2-21.5 19.6-23.5 24.6-4.2 50.5-4.4 76-.1 11.5 2 20 11.9 20 23.6v33.6c20.3 7.2 38.9 18 54.9 31.7l29.1-16.8c10-5.8 22.9-3.6 30.3 5.3 16.2 19.4 33.2 41.6 42.1 65.8 4 10.9.1 23.2-10 29.1l-33.7 16.8c3.9 21 3.9 42.5 0 63.5zm-117.6 21.1c59.2-77-28.7-164.9-105.7-105.7-59.2 77 28.7 164.9 105.7 105.7zm243.4 182.7l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4-11.8-4.4-22.6-10.7-32.1-18.6-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3-2-12-2.1-24.6 0-37.1 1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7 9.5-7.9 20.4-14.2 32.1-18.6 5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0l8.2-14.3c3-5.3 9.4-7.5 15.1-5.4 11.8 4.4 22.6 10.7 32.1 18.6 4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3 2 12 2.1 24.6 0 37.1-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7-9.5 7.9-20.4 14.2-32.1 18.6-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zM501.6 431c38.5 29.6 82.4-14.3 52.8-52.8-38.5-29.6-82.4 14.3-52.8 52.8z"></path></svg><!-- <i class="fas fa-cogs"></i> -->
+									</span>
+									<span class="wiki-article-menu-text is-hidden-touch"> 특수문서</span>
+									</a>
+									</li>
+                            {% endif %}
                             {% if menu != 0 %}
+									{% for sub_d in menu %}
+									    {% if sub_d[1] == '뒤로' %}
+											<li> <a href="/{{sub_d[0]}}"> <span class="icon"> <svg class="svg-inline--fa fa-arrow-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="" data-fa-processed=""><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg> </span> <span class="wiki-article-menu-text is-hidden-touch"> 뒤로</span></a> </li>
+										{% endif %}
+									{% endfor %}
+									{% if rdg == 1 %}
+									<li class="is-active">
+									<a href="">
+<span class="icon">
+<svg class="svg-inline--fa fa-eye fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M569.354 231.631C512.969 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-75.162 0-136-60.827-136-136 0-75.162 60.826-136 136-136 75.162 0 136 60.826 136 136 0 75.162-60.826 136-136 136zm104-136c0 57.438-46.562 104-104 104s-104-46.562-104-104c0-17.708 4.431-34.379 12.236-48.973l-.001.032c0 23.651 19.173 42.823 42.824 42.823s42.824-19.173 42.824-42.823c0-23.651-19.173-42.824-42.824-42.824l-.032.001C253.621 156.431 270.292 152 288 152c57.438 0 104 46.562 104 104z"></path></svg><!-- <i class="fas fa-eye"></i> -->
+</span><span class="wiki-article-menu-text is-hidden-touch"> 읽기</span>
+</a>
+</li>
+									{% else %}
+									<li class="is-active">
+<a href="">
+<span class="icon">
+<svg class="svg-inline--fa fa-wrench fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="wrench" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M507.73 109.1c-2.24-9.03-13.54-12.09-20.12-5.51l-74.36 74.36-67.88-11.31-11.31-67.88 74.36-74.36c6.62-6.62 3.43-17.9-5.66-20.16-47.38-11.74-99.55.91-136.58 37.93-39.64 39.64-50.55 97.1-34.05 147.2L18.74 402.76c-24.99 24.99-24.99 65.51 0 90.5 24.99 24.99 65.51 24.99 90.5 0l213.21-213.21c50.12 16.71 107.47 5.68 147.37-34.22 37.07-37.07 49.7-89.32 37.91-136.73zM64 472c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z"></path></svg><!-- <i class="fas fa-eye"></i> -->
+</span>
+<span class="wiki-article-menu-text is-hidden-touch"> 작업</span>
+</a>
+</li>
+{% endif %}
                                 {% for sub_d in menu %}
+										{% if sub_d[1] != '뒤로' %}
                                     <li>
-                                        <a href="/{{sub_d[0]}}">{{sub_d[1]}}</a>
+                                        <a href="/{{sub_d[0]}}">
+										{% if sub_d[1] == '편집' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-edit fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="edit" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path></svg><!-- <i class="fas fa-edit"></i> -->
+</span>
+										{% elif sub_d[1] == '토론' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-comments fa-w-18" aria-hidden="true" data-prefix="far" data-icon="comments" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"></path></svg><!-- <i class="far fa-comments"></i> -->
+</span>
+										{% elif sub_d[1] == '역사' %}<span class="icon">
+<svg class="svg-inline--fa fa-history fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="history" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M504 255.531c.253 136.64-111.18 248.372-247.82 248.468-59.015.042-113.223-20.53-155.822-54.911-11.077-8.94-11.905-25.541-1.839-35.607l11.267-11.267c8.609-8.609 22.353-9.551 31.891-1.984C173.062 425.135 212.781 440 256 440c101.705 0 184-82.311 184-184 0-101.705-82.311-184-184-184-48.814 0-93.149 18.969-126.068 49.932l50.754 50.754c10.08 10.08 2.941 27.314-11.313 27.314H24c-8.837 0-16-7.163-16-16V38.627c0-14.254 17.234-21.393 27.314-11.314l49.372 49.372C129.209 34.136 189.552 8 256 8c136.81 0 247.747 110.78 248 247.531zm-180.912 78.784l9.823-12.63c8.138-10.463 6.253-25.542-4.21-33.679L288 256.349V152c0-13.255-10.745-24-24-24h-16c-13.255 0-24 10.745-24 24v135.651l65.409 50.874c10.463 8.137 25.541 6.253 33.679-4.21z"></path></svg><!-- <i class="fas fa-history"></i> -->
+</span>
+                                    {% elif sub_d[1] == '역링크' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-random fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="random" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M504.971 359.029c9.373 9.373 9.373 24.569 0 33.941l-80 79.984c-15.01 15.01-40.971 4.49-40.971-16.971V416h-58.785a12.004 12.004 0 0 1-8.773-3.812l-70.556-75.596 53.333-57.143L352 336h32v-39.981c0-21.438 25.943-31.998 40.971-16.971l80 79.981zM12 176h84l52.781 56.551 53.333-57.143-70.556-75.596A11.999 11.999 0 0 0 122.785 96H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12zm372 0v39.984c0 21.46 25.961 31.98 40.971 16.971l80-79.984c9.373-9.373 9.373-24.569 0-33.941l-80-79.981C409.943 24.021 384 34.582 384 56.019V96h-58.785a12.004 12.004 0 0 0-8.773 3.812L96 336H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h110.785c3.326 0 6.503-1.381 8.773-3.812L352 176h32z"></path></svg><!-- <i class="fas fa-random"></i> -->
+</span>
+                                    {% elif sub_d[1] == 'ACL' %}
+									<span class="icon">
+<svg class="svg-inline--fa fa-key fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="key" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M512 176.001C512 273.203 433.202 352 336 352c-11.22 0-22.19-1.062-32.827-3.069l-24.012 27.014A23.999 23.999 0 0 1 261.223 384H224v40c0 13.255-10.745 24-24 24h-40v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24v-78.059c0-6.365 2.529-12.47 7.029-16.971l161.802-161.802C163.108 213.814 160 195.271 160 176 160 78.798 238.797.001 335.999 0 433.488-.001 512 78.511 512 176.001zM336 128c0 26.51 21.49 48 48 48s48-21.49 48-48-21.49-48-48-48-48 21.49-48 48z"></path></svg><!-- <i class="fas fa-key"></i> -->
+</span>
+										{% elif sub_d[1] == '삭제' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-trash-alt fa-w-14" aria-hidden="true" data-prefix="far" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M192 188v216c0 6.627-5.373 12-12 12h-24c-6.627 0-12-5.373-12-12V188c0-6.627 5.373-12 12-12h24c6.627 0 12 5.373 12 12zm100-12h-24c-6.627 0-12 5.373-12 12v216c0 6.627 5.373 12 12 12h24c6.627 0 12-5.373 12-12V188c0-6.627-5.373-12-12-12zm132-96c13.255 0 24 10.745 24 24v12c0 6.627-5.373 12-12 12h-20v336c0 26.51-21.49 48-48 48H80c-26.51 0-48-21.49-48-48V128H12c-6.627 0-12-5.373-12-12v-12c0-13.255 10.745-24 24-24h74.411l34.018-56.696A48 48 0 0 1 173.589 0h100.823a48 48 0 0 1 41.16 23.304L349.589 80H424zm-269.611 0h139.223L276.16 50.913A6 6 0 0 0 271.015 48h-94.028a6 6 0 0 0-5.145 2.913L154.389 80zM368 128H80v330a6 6 0 0 0 6 6h276a6 6 0 0 0 6-6V128z"></path></svg><!-- <i class="far fa-trash-alt"></i> -->
+</span>
+										{% elif sub_d[1] == '뒤로' %}
+										<span class="icon"> <svg class="svg-inline--fa fa-arrow-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="" data-fa-processed=""><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg> </span>
+										{% elif sub_d[1] == '이동' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-arrow-right fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg><!-- <i class="fas fa-arrow-right"></i> -->
+</span>
+										{% elif sub_d[1] == '문서' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-eye fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M569.354 231.631C512.969 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-75.162 0-136-60.827-136-136 0-75.162 60.826-136 136-136 75.162 0 136 60.826 136 136 0 75.162-60.826 136-136 136zm104-136c0 57.438-46.562 104-104 104s-104-46.562-104-104c0-17.708 4.431-34.379 12.236-48.973l-.001.032c0 23.651 19.173 42.823 42.824 42.823s42.824-19.173 42.824-42.823c0-23.651-19.173-42.824-42.824-42.824l-.032.001C253.621 156.431 270.292 152 288 152c57.438 0 104 46.562 104 104z"></path></svg><!-- <i class="fas fa-eye"></i> -->
+</span>
+										{% elif sub_d[1] == '기여내역' %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-chart-line fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M500 384c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v308h436zM456 96H344c-21.4 0-32.1 25.9-17 41l32.9 32.9-72 72.9-55.6-55.6c-4.7-4.7-12.2-4.7-16.9 0L96.4 305c-4.7 4.6-4.8 12.2-.2 16.9l28.5 29.4c4.7 4.8 12.4 4.9 17.1.1l82.1-82.1 55.5 55.5c4.7 4.7 12.3 4.7 17 0l109.2-109.2L439 249c15.1 15.1 41 4.4 41-17V120c0-13.3-10.7-24-24-24z"></path></svg><!-- <i class="fas fas fa-chart-line"></i> -->
+</span>
+										{% else %}
+										<span class="icon">
+<svg class="svg-inline--fa fa-wrench fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="wrench" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M507.73 109.1c-2.24-9.03-13.54-12.09-20.12-5.51l-74.36 74.36-67.88-11.31-11.31-67.88 74.36-74.36c6.62-6.62 3.43-17.9-5.66-20.16-47.38-11.74-99.55.91-136.58 37.93-39.64 39.64-50.55 97.1-34.05 147.2L18.74 402.76c-24.99 24.99-24.99 65.51 0 90.5 24.99 24.99 65.51 24.99 90.5 0l213.21-213.21c50.12 16.71 107.47 5.68 147.37-34.22 37.07-37.07 49.7-89.32 37.91-136.73zM64 472c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z"></path></svg><!-- <i class="fas fa-edit"></i> -->
+</span>
+{% endif %}
+<span class="wiki-article-menu-text is-hidden-touch"> {{sub_d[1]}}</span></a>
                                     </li>
+										{% endif %}
                                 {% endfor %}
                             {% endif %}
                         </ul>
@@ -129,25 +328,10 @@
         </section>
         <section class="section">
             <div class="container">
+				  
                 {{data|safe}}
             </div>
-            <div id="nav_bar">
-                <div id="go_top">
-                    <a href="#top">
-                        <i class="fas fa-arrow-up"></i>  
-                    </a>                  
-                </div>
-                <div id="go_bottom">
-                    <a href="#bottom">
-                        <i class="fas fa-arrow-down"></i>
-                    </a>
-                </div>
-                <div id="go_toc">
-                    <a href="#toc">
-                        <i class="fas fa-list"></i>
-                    </a>
-                </div>                                    
-            </div>
+            
         </section>
         <footer class="footer">
             <div class="container">
