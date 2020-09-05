@@ -1,5 +1,5 @@
 # openNAMU-Skin-Buma
-다운 받고 폴더 이름을 "buma"로 변경해서 "views"에 넣어주세요.
+내려받고 폴더 이름을 "buma-v2"로 변경해서 views 디렉토리에 넣어주세요.
 
 # Copyright
 Copyright (C) 2017 LiteHell
