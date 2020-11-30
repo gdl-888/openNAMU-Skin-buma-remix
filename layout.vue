@@ -324,8 +324,7 @@
                 <b-notification
                     v-if="
                         $store.state.session.member &&
-                        $store.state.session.member.user_document_discuss &&
-                        $store.state.localConfig['wiki.hide_user_document_discuss'] !== $store.state.session.member.user_document_discuss
+                        $store.state.session.member.user_document_discuss
                     "
                     class="is-link"
                 >
